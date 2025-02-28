@@ -40,7 +40,8 @@ import {
   adobe,
   sartesolution,
   chessweb,
-  jobsearch
+  jobsearch,
+  web3D,
 } from "../assets";
 
 export const navLinks = [
@@ -356,6 +357,28 @@ const projects = [
     image: jobsearch,
     source_code_link: "https://github.com/hamza-dev-tech/Job_finder",
     view:"https://job-finder-hamza.netlify.app/"
+  },
+  {
+    name: "3D Portfolio",
+    description:
+      "A 3D portfolio website that showcases my skills and projects. Its also shows my 3D model grip. a stack of technologies are used to make this website.",
+    tags: [
+      {
+        name: "react",
+        color: "blue-text-gradient",
+      },
+      {
+        name: "firebase",
+        color: "green-text-gradient",
+      },
+      {
+        name: "tailwind",
+        color: "pink-text-gradient",
+      },
+    ],
+    image: web3D,
+    source_code_link: "https://github.com/hamza-dev-tech/hamza-shabbir",
+    view:"https://vercel.com/hamza-dev-techs-projects/hamza-shabbir"
   },
   {
     name: "Trip Guide",
