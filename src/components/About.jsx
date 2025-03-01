@@ -1,6 +1,7 @@
 import React from "react";
 import Tilt from "react-parallax-tilt";
 import { motion } from "framer-motion";
+import profileImage from "../assets/profile.jpg";
 
 import { styles } from "../styles";
 import { services } from "../constants";
@@ -37,26 +38,52 @@ const ServiceCard = ({ index, title, icon }) => (
 const About = () => {
   return (
     <>
-      <motion.div variants={textVariant()}>
-        <p className={styles.sectionSubText}>Introduction</p>
-        <h2 className={styles.sectionHeadText}>Who Am I? 🚀
-        </h2>
-      </motion.div>
+      <div className="flex flex-col-reverse lg:flex-row gap-10">
+        <div className="lg:flex-[0.75]">
+          <motion.div variants={textVariant()}>
+            <p className={styles.sectionSubText}>Introduction</p>
+            <h2 className={styles.sectionHeadText}>Who Am I? 🚀</h2>
+          </motion.div>
 
-      <motion.p
-        variants={fadeIn("", "", 0.1, 1)}
-        className="mt-4 text-secondary text-[17px] max-w-3xl leading-[30px]"
-      >
-        I turn ideas into digital masterpieces. Whether it’s crafting immersive
-        experiences, building seamless interactions, or scaling businesses with
-        strategic innovation, I bring a fusion of technology, creativity, and
-        impact to everything I do. Every project I take on isn’t just about
-        functionality—it’s about storytelling, engagement, and leaving a lasting
-        impression. From intuitive user experiences to high-performance
-        solutions, I ensure that every detail aligns with excellence. If you’re
-        looking for someone who blends vision with execution, who understands
-        both the art and science of the digital world.
-      </motion.p>
+          <motion.p
+            variants={fadeIn("", "", 0.1, 1)}
+            className="mt-4 text-secondary text-[17px] max-w-3xl leading-[30px]"
+          >
+            I turn ideas into digital masterpieces. Whether it's crafting immersive
+            experiences, building seamless interactions, or scaling businesses with
+            strategic innovation, I bring a fusion of technology, creativity, and
+            impact to everything I do. Every project I take on isn't just about
+            functionality—it's about storytelling, engagement, and leaving a lasting
+            impression. From intuitive user experiences to high-performance
+            solutions, I ensure that every detail aligns with excellence. If you're
+            looking for someone who blends vision with execution, who understands
+            both the art and science of the digital world.
+          </motion.p>
+        </div>
+
+        <motion.div
+          variants={fadeIn("left", "spring", 0.2, 1)}
+          className="lg:flex-[0.25] flex justify-center items-center"
+        >
+          <Tilt
+            tiltMaxAngleX={45}
+            tiltMaxAngleY={45}
+            scale={1.05}
+            transitionSpeed={450}
+            className="w-[350px] h-[350px]"
+          >
+            <div className="green-pink-gradient p-[1px] rounded-[20px] shadow-card">
+              <div className="bg-tertiary rounded-[20px] overflow-hidden">
+                <img
+                  src={profileImage}
+                  alt="Malik Hamza Shabbir"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </div>
+          </Tilt>
+        </motion.div>
+      </div>
 
       <div className="mt-20 flex flex-wrap gap-10">
         {services.map((service, index) => (
