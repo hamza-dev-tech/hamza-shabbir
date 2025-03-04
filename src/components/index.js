@@ -9,9 +9,11 @@ import Feedbacks from "./Feedbacks";
 import Contact from "./Contact";
 import CanvasLoader from "./Loader";
 import { Education } from './Education';
+import Game from './Game';
 
 
 export {
+  Game,
   Hero,
   Navbar,
   About,
