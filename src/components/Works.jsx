@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useRef } from "react";
 import Tilt from "react-parallax-tilt";
 import { motion } from "framer-motion";
-import {link} from "../assets"
+import { link } from "../assets";
 import { styles } from "../styles";
 import { github } from "../assets";
 import { SectionWrapper } from "../hoc";
@@ -38,7 +38,7 @@ const ProjectCard = ({
 
           <div className="absolute inset-0 flex justify-end m-3 card-img_hover">
             <div
-            style={{marginRight:'5px'}}
+              style={{ marginRight: "5px" }}
               onClick={() => window.open(source_code_link, "_blank")}
               className="black-gradient w-10 h-10 rounded-full flex justify-center items-center cursor-pointer"
             >
@@ -68,10 +68,7 @@ const ProjectCard = ({
 
         <div className="mt-4 flex flex-wrap gap-2">
           {tags.map((tag) => (
-            <p
-              key={`${name}-${tag.name}`}
-              className={`text-[14px] ${tag.color}`}
-            >
+            <p key={`${name}-${tag.name}`} className={`text-[14px] ${tag.color}`}>
               #{tag.name}
             </p>
           ))}
@@ -81,20 +78,44 @@ const ProjectCard = ({
   );
 };
 
-const ScrollIndicator = () => (
-  <>
-    <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-tertiary to-transparent pointer-events-none z-10 hidden group-hover:block" />
-    <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-tertiary to-transparent pointer-events-none z-10 hidden group-hover:block" />
-    <div className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/10 p-2 rounded-full hidden group-hover:block z-20">
-      <HiChevronLeft className="w-6 h-6 text-white" />
-    </div>
-    <div className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/10 p-2 rounded-full hidden group-hover:block z-20">
-      <HiChevronRight className="w-6 h-6 text-white" />
-    </div>
-  </>
-);
+const ScrollIndicator = ({ scrollRef }) => {
+  const scrollLeft = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({ left: -300, behavior: "smooth" });
+    }
+  };
+
+  const scrollRight = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({ left: 300, behavior: "smooth" });
+    }
+  };
+
+  return (
+    <>
+      <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-tertiary to-transparent pointer-events-none z-10 hidden group-hover:block" />
+      <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-tertiary to-transparent pointer-events-none z-10 hidden group-hover:block" />
+      <div
+        onClick={scrollLeft}
+        className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/10 p-2 rounded-full hidden group-hover:block z-20 cursor-pointer"
+      >
+        <HiChevronLeft className="w-6 h-6 text-white" />
+      </div>
+      <div
+        onClick={scrollRight}
+        className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/10 p-2 rounded-full hidden group-hover:block z-20 cursor-pointer"
+      >
+        <HiChevronRight className="w-6 h-6 text-white" />
+      </div>
+    </>
+  );
+};
 
 const Works = () => {
+  const webScrollRef = useRef(null);
+  const appScrollRef = useRef(null);
+  const blockchainScrollRef = useRef(null);
+
   // Filter projects into different categories
   const webProjects = projects.filter((project) =>
     project.tags.some((tag) => tag.name === "react" || tag.name === "nextjs")
@@ -157,21 +178,24 @@ const Works = () => {
       <div className="mt-20">
         <h3 className={`${styles.sectionHeadText}`}>Web Development</h3>
         <div className="mt-10 relative group">
-          <div className="overflow-x-auto scrollbar-hide" 
-               style={{
-                 msOverflowStyle: 'none',
-                 scrollbarWidth: 'none',
-                 WebkitOverflowScrolling: 'touch'
-               }}>
-            <div className="flex gap-7" style={{ minWidth: 'min-content' }}>
+          <div
+            ref={webScrollRef}
+            className="overflow-x-auto scrollbar-hide"
+            style={{
+              msOverflowStyle: "none",
+              scrollbarWidth: "none",
+              WebkitOverflowScrolling: "touch",
+            }}
+          >
+            <div className="flex gap-7 min-w-max">
               {webProjects.map((project, index) => (
-                <div className="min-w-[360px]" key={`web-${index}`}>
+                <div className="min-w-[280px] sm:min-w-[360px]" key={`web-${index}`}>
                   <ProjectCard index={index} {...project} />
                 </div>
               ))}
             </div>
           </div>
-          <ScrollIndicator />
+          <ScrollIndicator scrollRef={webScrollRef} />
         </div>
       </div>
 
@@ -179,21 +203,24 @@ const Works = () => {
       <div className="mt-20">
         <h3 className={`${styles.sectionHeadText}`}>App Development</h3>
         <div className="mt-10 relative group">
-          <div className="overflow-x-auto scrollbar-hide"
-               style={{
-                 msOverflowStyle: 'none',
-                 scrollbarWidth: 'none',
-                 WebkitOverflowScrolling: 'touch'
-               }}>
-            <div className="flex gap-7" style={{ minWidth: 'min-content' }}>
+          <div
+            ref={appScrollRef}
+            className="overflow-x-auto scrollbar-hide"
+            style={{
+              msOverflowStyle: "none",
+              scrollbarWidth: "none",
+              WebkitOverflowScrolling: "touch",
+            }}
+          >
+            <div className="flex gap-7 min-w-max">
               {appProjects.map((project, index) => (
-                <div className="min-w-[360px]" key={`app-${index}`}>
+                <div className="min-w-[280px] sm:min-w-[360px]" key={`app-${index}`}>
                   <ProjectCard index={index} {...project} />
                 </div>
               ))}
             </div>
           </div>
-          <ScrollIndicator />
+          <ScrollIndicator scrollRef={appScrollRef} />
         </div>
       </div>
 
@@ -201,21 +228,24 @@ const Works = () => {
       <div className="mt-20">
         <h3 className={`${styles.sectionHeadText}`}>Blockchain Development</h3>
         <div className="mt-10 relative group">
-          <div className="overflow-x-auto scrollbar-hide"
-               style={{
-                 msOverflowStyle: 'none',
-                 scrollbarWidth: 'none',
-                 WebkitOverflowScrolling: 'touch'
-               }}>
-            <div className="flex gap-7" style={{ minWidth: 'min-content' }}>
+          <div
+            ref={blockchainScrollRef}
+            className="overflow-x-auto scrollbar-hide"
+            style={{
+              msOverflowStyle: "none",
+              scrollbarWidth: "none",
+              WebkitOverflowScrolling: "touch",
+            }}
+          >
+            <div className="flex gap-7 min-w-max">
               {blockchainProjects.map((project, index) => (
-                <div className="min-w-[360px]" key={`blockchain-${index}`}>
+                <div className="min-w-[280px] sm:min-w-[360px]" key={`blockchain-${index}`}>
                   <ProjectCard index={index} {...project} />
                 </div>
               ))}
             </div>
           </div>
-          <ScrollIndicator />
+          <ScrollIndicator scrollRef={blockchainScrollRef} />
         </div>
       </div>
       <Artifacts />

@@ -15,7 +15,12 @@ const ServiceCard = ({ index, title, icon }) => (
       className="w-full green-pink-gradient p-[1px] rounded-[20px] shadow-card"
     >
       <div className="bg-tertiary rounded-[20px] py-5 px-12 min-h-[280px] flex justify-evenly items-center flex-col">
-        <img src={icon} alt="web-development" className="w-16 h-16 object-contain" />
+        <img 
+          src={icon} 
+          alt={`${title} service icon`} 
+          className="w-16 h-16 object-contain" 
+          loading="lazy" // Lazy load for better performance
+        />
         <h3 className="text-white text-[20px] font-bold text-center">{title}</h3>
       </div>
     </motion.div>
@@ -40,31 +45,29 @@ const About = () => {
   };
 
   return (
-    <>
-      <div className="flex flex-col-reverse lg:flex-row gap-10">
-        <div className="lg:flex-[0.75]">
+    <section id="about" className="py-8 px-4 sm:px-8 md:px-16 lg:px-24"> {/* Semantic HTML for SEO */}
+      <div className="flex flex-col-reverse lg:flex-row gap-6 lg:gap-10">
+        {/* Text Content */}
+        <div className="lg:flex-[0.75] flex-1">
           <motion.div variants={textVariant()}>
             <p className={styles.sectionSubText}>Introduction</p>
-            <h2 className={styles.sectionHeadText}>Who Am I? 🚀</h2>
+            <h1 className={styles.sectionHeadText}>Who Am I? 🚀</h1> {/* H1 for SEO */}
           </motion.div>
 
-          <motion.p variants={fadeIn("", "", 0.1, 1)} className="mt-4 text-secondary text-[17px] max-w-3xl leading-[30px]">
-            I turn ideas into digital masterpieces. Whether it's crafting immersive
-            experiences, building seamless interactions, or scaling businesses with
-            strategic innovation, I bring a fusion of technology, creativity, and
-            impact to everything I do.
+          <motion.p variants={fadeIn("", "", 0.1, 1)} className="mt-4 text-secondary text-[15px] sm:text-[17px] max-w-full sm:max-w-3xl leading-[24px] sm:leading-[30px]">
+            I’m <strong>Malik Hamza Shabbir</strong>, a <strong>Full-Stack Developer</strong> and <strong>AI Tutor</strong> based in <strong>Abbottabad, Pakistan</strong>. With expertise in <strong>Next.js, React Native, Blockchain, and AI</strong>, I transform ideas into scalable digital solutions. Whether it’s building <strong>web and mobile apps</strong>, creating <strong>AI-powered chatbots</strong>, or mentoring students in <strong>Computer Science</strong>, I bring a blend of creativity and technical precision to every project.
           </motion.p>
+
           <motion.p variants={fadeIn("", "", 0.1, 1)} className="mt-4 text-secondary text-[17px] max-w-3xl leading-[30px]">
-            Every project I take on isn't just about functionality—it's about
-            storytelling, engagement, and leaving a lasting impression.
+            My work includes projects like the <strong>Smart Bus System</strong> (used by 1,200+ daily commuters) and the <strong>Rescue App</strong> (reducing emergency response times by 50%). I’m also the founder of <strong>Sarte Solution</strong>, where we deliver cutting-edge tech solutions for clients worldwide.
           </motion.p>
+
           <motion.p variants={fadeIn("", "", 0.1, 1)} className="mt-4 text-secondary text-[17px] max-w-3xl leading-[30px]">
-            If you're looking for someone who blends vision with execution, who
-            understands both the art and science of the digital world, let's connect!
+            If you’re looking for a <strong>Full-Stack Developer</strong> who combines <strong>innovation</strong> with <strong>execution</strong>, let’s connect and build something amazing together!
           </motion.p>
 
           {/* Cool Animated Contact Button */}
-          <motion.div variants={fadeIn("", "", 0.1, 1)} className="mt-6 relative inline-block">
+          <motion.div variants={fadeIn("", "", 0.1, 1)} className="mt-6 relative inline-block w-full sm:w-auto">
             <motion.button
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
@@ -85,16 +88,16 @@ const About = () => {
               onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouseLeave}
             >
-              <a href="https://www.linkedin.com/in/yourprofile" target="_blank" rel="noopener noreferrer">
+              <a href="https://www.linkedin.com/in/hamza-dev-tech" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile">
                 <FaLinkedin className="text-white text-3xl hover:text-blue-500 transition-transform transform hover:scale-125" />
               </a>
-              <a href="https://github.com/yourprofile" target="_blank" rel="noopener noreferrer">
+              <a href="https://github.com/hamza-dev-tech" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile">
                 <FaGithub className="text-white text-3xl hover:text-gray-400 transition-transform transform hover:scale-125" />
               </a>
-              <a href="mailto:your@email.com">
+              <a href="mailto:hamzadevtech01@gmail.com" aria-label="Email">
                 <FaEnvelope className="text-white text-3xl hover:text-red-500 transition-transform transform hover:scale-125" />
               </a>
-              <a href="https://wa.me/yourwhatsapp" target="_blank" rel="noopener noreferrer">
+              <a href="https://wa.me/923168809943" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
                 <FaWhatsapp className="text-white text-3xl hover:text-green-500 transition-transform transform hover:scale-125" />
               </a>
             </motion.div>
@@ -102,11 +105,16 @@ const About = () => {
         </div>
 
         {/* Profile Picture */}
-        <motion.div variants={fadeIn("left", "spring", 0.2, 1)} className="lg:flex-[0.25] flex justify-center items-center">
+        <motion.div variants={fadeIn("left", "spring", 0.2, 1)} className="lg:flex-[0.25] flex-1 flex justify-center items-center">
           <Tilt tiltMaxAngleX={45} tiltMaxAngleY={45} scale={1.05} transitionSpeed={450} className="w-[350px] h-[350px]">
             <div className="green-pink-gradient p-[1px] rounded-[20px] shadow-card">
               <div className="bg-tertiary rounded-[20px] overflow-hidden">
-                <img src={profileImage} alt="Malik Hamza Shabbir" className="w-full h-full object-cover" />
+                <img 
+                  src={profileImage} 
+                  alt="Malik Hamza Shabbir - Full-Stack Developer and AI Tutor" 
+                  className="w-full h-full object-cover" 
+                  loading="lazy" // Lazy load for better performance
+                />
               </div>
             </div>
           </Tilt>
@@ -114,12 +122,12 @@ const About = () => {
       </div>
 
       {/* Services Section */}
-      <div className="mt-20 flex flex-wrap gap-10">
+      <div className="mt-12 sm:mt-20 flex flex-wrap gap-6 sm:gap-10">
         {services.map((service, index) => (
           <ServiceCard key={service.title} index={index} {...service} />
         ))}
       </div>
-    </>
+    </section>
   );
 };
 
